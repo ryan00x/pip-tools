@@ -640,7 +640,7 @@ def test_editable_package_in_constraints(pip_conf, runner, req_editable):
 def test_editable_package_vcs(runner):
     vcs_package = (
         "git+https://github.com/jazzband/pip-tools@"
-        "f97e62ecb0d9b70965c8eff952c001d8e2722e94"
+        "5f31d8a79b5fd16305372cf700b01cc7f16c2ccf"
         "#egg=pip-tools"
     )
     with open("requirements.in", "w") as req_in:
@@ -757,10 +757,10 @@ def test_locally_available_editable_package_is_not_archived_in_cache_dir(
         ),
         pytest.param(
             "pytest-django @ git+https://github.com/pytest-dev/pytest-django"
-            "@21492afc88a19d4ca01cd0ac392a5325b14f95c7"
+            "@5ada9c1596ee9e0624801d553995d98d2e3ccce8"
             "#egg=pytest-django",
             "pytest-django @ git+https://github.com/pytest-dev/pytest-django"
-            "@21492afc88a19d4ca01cd0ac392a5325b14f95c7",
+            "@5ada9c1596ee9e0624801d553995d98d2e3ccce8",
             id="VCS with direct reference and egg",
         ),
     ),
@@ -875,12 +875,12 @@ def test_relative_file_uri_package(pip_conf, runner):
 def test_direct_reference_with_extras(runner):
     with open("requirements.in", "w") as req_in:
         req_in.write(
-            "pip-tools[testing,coverage] @ git+https://github.com/jazzband/pip-tools@6.2.0"
+            "pip-tools[testing,coverage] @ git+https://github.com/jazzband/pip-tools@v7.5.3"
         )
     out = runner.invoke(cli, ["-n", "--rebuild", "--no-build-isolation"])
     assert out.exit_code == 0
     assert (
-        "pip-tools[coverage,testing] @ git+https://github.com/jazzband/pip-tools@6.2.0"
+        "pip-tools[coverage,testing] @ git+https://github.com/jazzband/pip-tools@v7.5.3"
         in out.stderr
     )
     assert "pytest==" in out.stderr

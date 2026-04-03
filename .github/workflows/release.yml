@@ -76,7 +76,7 @@ jobs:
       github.event.action == 'published'
       && fromJSON(needs.build-and-test.outputs.is-upstream-repository)
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     timeout-minutes: 2 # docker+network are slow sometimes
 

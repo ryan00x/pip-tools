@@ -2,6 +2,7 @@
 # Welcome to pip-tools' documentation!
 
 ```{include} ../README.md
+:heading-offset: 1
 
 ```
 

@@ -108,7 +108,7 @@ jobs:
 
     steps:
     - name: Switch to using Python 3.14 by default
-      uses: actions/setup-python@v6
+      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
       with:
         python-version: 3.14
     - name: >-
@@ -144,7 +144,7 @@ jobs:
         ) as outputs_file:
             print('release-requested=true', file=outputs_file)
     - name: Check out src from Git
-      uses: actions/checkout@v4
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
       with:
         fetch-depth: >-
           ${{
@@ -179,7 +179,7 @@ jobs:
     - name: Set up pip cache
       if: >-
         steps.request-check.outputs.release-requested != 'true'
-      uses: re-actors/cache-python-deps@release/v1
+      uses: re-actors/cache-python-deps@810325a232f2a28ea124dfba85c7c72fd1774b38  # v1.0.0
       with:
         cache-key-for-dependency-files: >-
           ${{ steps.calc-cache-key-files.outputs.cache-key-for-dep-files }}
@@ -339,16 +339,16 @@ jobs:
           || ''
         }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
       - name: Set up Python ${{ matrix.python-version }} from GitHub
         id: python-install
         if: "!endsWith(matrix.python-version, '-dev')"
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
         with:
           python-version: ${{ matrix.python-version }}
       - name: Set up Python ${{ matrix.python-version }} from deadsnakes
         if: endsWith(matrix.python-version, '-dev')
-        uses: deadsnakes/action@v2.1.1
+        uses: deadsnakes/action@e640ac8743173a67cca4d7d77cd837e514bf98e8  # v3.2.0
         with:
           python-version: ${{ matrix.python-version }}
       - name: Log python version info (${{ matrix.python-version }})
@@ -359,7 +359,7 @@ jobs:
         run: |
           echo "dir=$(pip cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Pip cache
-        uses: actions/cache@v4
+        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7  # v5.0.4
         with:
           path: ${{ steps.pip-cache.outputs.dir }}
           key: >-
@@ -415,7 +415,7 @@ jobs:
         if: >-
           !cancelled()
           && !inputs.cpython-pip-version
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@57e3a136b779b570ffcdbf80b3bdc90e7fab3de2  # v6.0.0
         with:
           files: ./coverage.xml
           flags: >-
@@ -449,9 +449,9 @@ jobs:
     env:
       TOXENV: pip${{ matrix.pip-version }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
         with:
           python-version: ${{ matrix.python-version }}
       - name: Get pip cache dir
@@ -460,7 +460,7 @@ jobs:
         run: |
           echo "dir=$(pip cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Pip cache
-        uses: actions/cache@v4
+        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7  # v5.0.4
         with:
           path: ${{ steps.pip-cache.outputs.dir }}
           key: >-
@@ -524,7 +524,7 @@ jobs:
       - name: Notify Codecov that all coverage reports have been uploaded
         if: >-
           !cancelled()
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@57e3a136b779b570ffcdbf80b3bdc90e7fab3de2  # v6.0.0
         with:
           fail_ci_if_error: true
           run_command: send-notifications
@@ -552,6 +552,6 @@ jobs:
 
     steps:
       - name: Decide whether the needed jobs succeeded or failed
-        uses: re-actors/alls-green@afee1c1eac2a506084c274e9c02c8e0687b48d9e
+        uses: re-actors/alls-green@05ac9388f0aebcb5727afa17fcccfecd6f8ec5fe  # v1.2.2
         with:
           jobs: ${{ toJSON(needs) }}

@@ -94,7 +94,7 @@ jobs:
 
     steps:
       - name: Download all the dists
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c  # v8.0.1
         with:
           name: >-
             ${{ needs.build-and-test.outputs.dists-artifact-name }}
@@ -105,11 +105,11 @@ jobs:
             needs.build-and-test.outputs.project-version
           }} to PyPI
           🔏
-        uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e  # v1.13.0
       - name: Clean up the publish attestation leftovers
         run: rm -fv dist/*.publish.attestation
       - name: Upload packages to Jazzband
-        uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e  # v1.13.0
         with:
           user: jazzband
           password: ${{ secrets.JAZZBAND_RELEASE_KEY }}

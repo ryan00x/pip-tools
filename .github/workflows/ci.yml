@@ -433,7 +433,7 @@ jobs:
   pypy:
     name: ${{ matrix.runner-vm }} / ${{ matrix.python-version }} / ${{ matrix.pip-version }}
     runs-on: ${{ matrix.runner-vm }}
-    timeout-minutes: 9
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
